@@ -1,0 +1,18 @@
+[
+    {
+        "id": 1,
+        "id_genero": 1,
+        "nome": "B",
+        "fone": "am",
+        "email": "a",
+        "senha": "a"
+    },
+    {
+        "id": 2,
+        "id_genero": 1,
+        "nome": "Bsb",
+        "fone": "am",
+        "email": "a",
+        "senha": "a"
+    }
+]
