@@ -1,10 +1,6 @@
-from templates.manter_apresentacoesUI import ManterApresentacaoUI
-from templates.manter_avaliacoesUI import ManterAvaliacaoUI
-from templates.manter_bandasUI import ManterBandaUI
-from templates.manter_cidadesUI import ManterCidadeUI
-from templates.manter_faUI import ManterFaUI
-from templates.manter_generosUI import ManterGeneroUI
-from templates.manter_seguidoresUI import ManterSeguidorUI
+from templates.manterapresentacoesUI import ManterApresentacaoUI
+from templates.manterbandaUI import ManterBandaUI
+from templates.mantercidadeUI import ManterCidadeUI
 from templates.loginUI import LoginUI
 from views import View
 import streamlit as st
@@ -16,15 +12,11 @@ class IndexUI:
     if op == "Login": LoginUI.main()
 
   def menu_admin():
-    op = st.sidebar.selectbox("Menu", ["Manter Apresentacoes", "Manter Avaliacoes", "Manter Bandas", 
-    "Manter Cidades", "Manter Fas","Manter Generos","Manter Seguidores"])
+    op = st.sidebar.selectbox("Menu", ["Manter Apresentacoes", "Manter Bandas", 
+    "Manter Cidades"])
     if op == "Manter Apresentacoes": ManterApresentacaoUI.main()
-    if op == "Manter Avaliacoes": ManterAvaliacaoUI.main()
     if op == "Manter Bandas": ManterBandaUI.main()
     if op == "Manter Cidades": ManterCidadeUI.main()
-    if op == "Manter Fas": ManterFaUI.main()
-    if op == "Manter Generos": ManterGeneroUI.main()
-    if op == "Manter Seguidores": ManterSeguidorUI.main()
 
   def btn_logout():
     if st.sidebar.button("Logout"):
