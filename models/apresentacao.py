@@ -1,7 +1,9 @@
-import json
 from datetime import datetime
+import json
+import streamlit as st
+
+
 class Apresentacao:
-    @staticmethod
     def __init__(self,id,id_banda,id_cidade,data,confirmado):
         self.__id = id
         self.__id_banda = id_banda
@@ -20,29 +22,35 @@ class Apresentacao:
     def get_id_cidade(self): return self.__id_cidade
     def get_data(self): return self.__data
     def get_confirmado(self): return self.__confirmado
-   
+
+    def __eq__(self, x):
+        if x is not None:
+            if self.__id == x.__id and self.__id_banda == x.__id_banda and self.__id_cidade == x.__id_cidade and self.__data== x.__data and self.__confirmado == x.__confirmado:
+                return True
+        return False
+    
 
     def to_json(self):
-        return {
+        return{
         "id": self.__id,
         "id_banda": self.__id_banda,
         "id_cidade": self.__id_cidade,
-        "data": self.__data.strftime("%d/%m/%Y %H:%M"),
+        "data": self.get_data().strftime('%d/%m/%Y %H:%M'), 
         "confirmado": self.__confirmado,
         }
 
     def __str__(self):
-        return f"{self.__id} - {self.__id_banda}  - {self.__id_cidade} - {self.__data.strftime('%d/%m/%Y %H:%M')} - {self.__confirmado}"
+        return f"{self.__id} - {self.__id_banda}  - {self.__id_cidade} - {self.get_data().strftime('%d/%m/%Y %H:%M')} - {self.__confirmado}"
     
 class NApresentacao:
     __apresentacoes = []
     @classmethod
-    def inserir(cls,obj):
+    def inserir(cls, obj):
         cls.abrir()
-        id=0
+        id = 0
         for apresentacao in cls.__apresentacoes:
             id = apresentacao.get_id()
-        obj.set_id(id+1)
+        obj.set_id(id + 1)
         cls.__apresentacoes.append(obj)
         cls.salvar()
 
@@ -64,8 +72,8 @@ class NApresentacao:
         cls.abrir()
         apresentacao = cls.listar_id(obj.get_id())
         if apresentacao is not None:
-            apresentacao.set_idBanda(obj.get_id_banda())
-            apresentacao.set_idCidade(obj.get_id_cidade())
+            apresentacao.set_id_banda(obj.get_id_banda())
+            apresentacao.set_id_cidade(obj.get_id_cidade())
             apresentacao.set_data(obj.get_data())
             apresentacao.set_confirmado(obj.get_confirmado())
             cls.salvar()
@@ -83,10 +91,11 @@ class NApresentacao:
     def abrir(cls):
         cls.__apresentacoes =[]
         try:
-            with open("apresentacaoes.json" , mode='r') as arquivo:
+            with open("apresentacoes.json" , mode='r') as arquivo:
                 apresentacoes_json = json.load(arquivo)
                 for obj in apresentacoes_json:
-                    a = Apresentacao(obj["id"],obj["id_banda"],obj["id_cidade"],obj["data"],obj["confirmado"])
+                    obj["data"] = datetime.strptime(obj["data"], '%d/%m/%Y %H:%M')
+                    a = Apresentacao(obj["id"], obj["id_banda"], obj["id_cidade"], obj["data"], obj["confirmado"])                    
                     cls.__apresentacoes.append(a)
         except FileNotFoundError:
             pass
@@ -98,8 +107,8 @@ class NApresentacao:
             for apresentacao in cls.__apresentacoes:
                 apresentacoes_salvar.append(apresentacao.to_json())
             json.dump(apresentacoes_salvar,arquivo,indent=4)
-        
 
+    
 
 
 

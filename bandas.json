@@ -1,0 +1,34 @@
+[
+    {
+        "id": 0,
+        "id_genero": 0,
+        "nome": "admin",
+        "fone": "0000",
+        "email": "admin",
+        "senha": "admin"
+    },
+    {
+        "id": 1,
+        "id_genero": 2,
+        "nome": "Paralamas",
+        "fone": "84 811919",
+        "email": "pedro@gmail.com",
+        "senha": "12"
+    },
+    {
+        "id": 2,
+        "id_genero": 1,
+        "nome": "GBR",
+        "fone": "84 89199-0912",
+        "email": "gbr@gmail.com",
+        "senha": "1000"
+    },
+    {
+        "id": 3,
+        "id_genero": 2,
+        "nome": "GaR",
+        "fone": "84 89199aa-0912",
+        "email": "a",
+        "senha": "a"
+    }
+]

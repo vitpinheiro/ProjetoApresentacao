@@ -1,6 +1,8 @@
 from models.apresentacao import Apresentacao,NApresentacao
 from models.banda import Banda,NBanda
 from models.cidade import Cidade,NCidade
+from models.genero import  Genero,NGenero
+from datetime import datetime,timedelta
 
 class View:
     @staticmethod
@@ -37,7 +39,8 @@ class View:
         for b in View.banda_listar():
             if b.get_nome()=="admin":  
                 return 
-        View.banda_inserir(0, "admin", "admin", "0000", "admin", "admin")  
+        View.banda_inserir(0, "admin", "0000", "admin", "admin")
+  
     def usuario_login(email, senha):
         for b in View.banda_listar():
             if b.get_email() == email and b.get_senha() == senha:
@@ -51,9 +54,7 @@ class View:
     def cidade_listar():
         return NCidade.listar()
     def cidade_listar_id(id):
-        if id!=0:
-            return NCidade.listar_id(id)
-        return None
+        return NCidade.listar_id(id)
     def cidade_atualizar(id,nome):
         cidade  = Cidade(id,nome)
         NCidade.atualizar(cidade)
@@ -63,3 +64,25 @@ class View:
 
     
     
+    def genero_inserir(nome):
+        genero = Genero(0,nome)
+        NGenero.inserir(genero)
+    def genero_listar():
+        return NGenero.listar()
+    def genero_listar_id(id):
+        return NGenero.listar_id(id)
+    def genero_atualizar(id,nome):
+        genero = Genero(id,nome)
+        NGenero.atualizar(genero)
+    def genero_excluir(id):
+        genero = Genero(id,"")
+        NGenero.excluir(genero)
+    def abrir_apresentacao_do_dia(data_ini,data_final,intervalo):
+        data_hoje =datetime.today()
+        if data_ini<=data_hoje or data_final<data_ini or intervalo<=0:
+            raise ValueError
+        
+        intervalo_ =  timedelta(minutes=intervalo)       
+        while data_ini <=data_final:
+            NApresentacao.inserir(Apresentacao(0,0,0,data_ini,False))
+            data_ini= data_ini + intervalo_

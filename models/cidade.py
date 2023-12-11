@@ -17,6 +17,11 @@ class Cidade:
             "id": self.__id,
             "nome": self.__nome
         }
+    def __eq__(self, x):
+        if x is not None:
+            if self.__id == x.__id and self.__nome == x.__nome:
+                return True
+        return False
 
     def __str__(self):
         return f"{self.__id} - {self.__nome}"
@@ -84,3 +89,4 @@ class NCidade:
             for cidade in cls.__cidades:
                 cidades_salvar.append(cidade.to_json())
             json.dump(cidades_salvar, arquivo, indent=4)
+
