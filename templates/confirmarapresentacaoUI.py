@@ -7,7 +7,7 @@ from datetime import datetime
 class ConfirmarAgendamentoUI:
     @staticmethod
     def main():
-        st.header('Confirmar agendamento')
+        st.header('Confirmar Apresentação')
         ConfirmarAgendamentoUI.confimar()
     def confimar():
         lista_solicitacao = []

@@ -6,7 +6,7 @@ from datetime import datetime,timedelta
 class EditarApresentacoesUI:
     @staticmethod
     def main():
-        st.header('Login')
+        st.header('Editar Apresentação')
         EditarApresentacoesUI.editar()
     def editar():
         usuario = View.banda_listar_id(st.session_state["usuario_id"])
@@ -24,22 +24,20 @@ class EditarApresentacoesUI:
                     lista_disponivel.append(apresentacao.get_data())
 
         cidades= View.cidade_listar()
-        op1 = st.selectbox('Apresentações',apresentacoes_usuario,index=None,placeholder='Escolha uma apresentação')
-        cidade_atual = View.cidade_listar_id(op1.get_id_cidade() if op1!=None else None)
+        op = st.selectbox('Apresentações',apresentacoes_usuario,index=None,placeholder='Escolha uma apresentação')
+        cidade_atual = View.cidade_listar_id(op.get_id_cidade() if op!=None else None)
         if cidade_atual  is not None:
             id_cidade = st.selectbox('Cidades',cidades, index = cidades.index(cidade_atual),key='select_cidade_index')
         else:
             id_cidade = st.selectbox('Cidades',cidades,index=None,placeholder='Escolha uma cidade',key='select_cidade_index')        
-        op2 = st.selectbox('Selecione um horario',lista_disponivel,index=None,placeholder="Escolha um horário entre os listados acima")
+        data = st.text_input('Informe a nova data da apresentação',op.get_data().strftime("%d/%m/%Y %H:%M") if op!=None else None)
         if st.button('confirmar'):
             try:
-                View.apresentacao_atualizar(op1.get_id(),usuario.get_id(), id_cidade.get_id(), op2, False)
+                View.apresentacao_atualizar(op.get_id(),usuario.get_id(), id_cidade.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"), False)
                 st.success('Perfil atualizado com sucesso')
                 time.sleep(1)
-                st.rerun()
             except ValueError as erro:
                 st.error(erro)
                 time.sleep(1)
-                st.rerun()
     
                     

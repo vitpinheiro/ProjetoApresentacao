@@ -5,7 +5,7 @@ from templates.mantergeneroUI import ManterGeneroUI
 from templates.loginUI import LoginUI
 from views import View
 from templates.abrircontaUI import AbrirContaUI
-from templates.abrirapresentacoes import AbrirAgendaUI
+
 from templates.agendarapresentacaoUI import ApresentacaoHorarioUI
 from templates.confirmarapresentacaoUI import ConfirmarAgendamentoUI
 from templates.editarperfilUI import EditarPerfilUI
@@ -25,20 +25,19 @@ class IndexUI:
 
   def menu_admin():
     op = st.sidebar.selectbox("Menu", ["Manter Apresentacoes", "Manter Bandas", 
-    "Manter Cidades","Manter Generos","Abrir apresentacoes","Confirmar apresentacao","Editar perfil"])
+    "Manter Cidades","Manter Generos","Confirmar apresentacao","Editar perfil"])
     if op == "Manter Apresentacoes": ManterApresentacaoUI.main()
     if op == "Manter Bandas": ManterBandaUI.main()
     if op == "Manter Cidades": ManterCidadeUI.main()
     if op == "Manter Generos": ManterGeneroUI.main()
-    if op == "Abrir apresentacoes": AbrirAgendaUI.main()
+
     if op == "Confirmar apresentacao" : ConfirmarAgendamentoUI.main()
     if op == "Editar perfil" : EditarPerfilUI.main()
     if op == "Relatório" : RelatorioUI.main()
 
   def menu_banda():
     op = st.sidebar.selectbox("Menu", ["Abrir Conta","Agendar apresentacao",
-    "Editar perfil","Editar Apresentacoes","Cancelar Apresentacao","Visualizar Apresentacoes"
-    "Apresentações Hoje","Relatório"])
+    "Editar perfil","Editar Apresentacoes","Cancelar Apresentacao","Visualizar Apresentacoes","Apresentações Hoje","Relatório"])
     if op == "Abrir Conta" : AbrirContaUI.main()
     if op == "Agendar apresentacao" : ApresentacaoHorarioUI.main()
     if op == "Editar perfil" : EditarPerfilUI.main()

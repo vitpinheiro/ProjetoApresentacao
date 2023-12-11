@@ -24,11 +24,19 @@
         "senha": "1000"
     },
     {
-        "id": 3,
-        "id_genero": 2,
-        "nome": "GaR",
-        "fone": "84 89199aa-0912",
-        "email": "a",
-        "senha": "a"
+        "id": 4,
+        "id_genero": 1,
+        "nome": "Moby Dick",
+        "fone": "40028923",
+        "email": "mobydick@gmail.com",
+        "senha": "1234"
+    },
+    {
+        "id": 5,
+        "id_genero": 7,
+        "nome": "Ponto de equilibrio",
+        "fone": "40048922",
+        "email": "pontodeequilibrio@gmail.com",
+        "senha": "1234"
     }
 ]

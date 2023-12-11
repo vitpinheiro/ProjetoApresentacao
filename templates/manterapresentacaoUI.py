@@ -54,7 +54,7 @@ class ManterApresentacaoUI:
             id_cidade = st.selectbox('Cidades',cidades,index=None,placeholder='Escolha uma cidade',key='select_cidade_index')
             
         id= op.get_id() if op!=None else None
-        data = st.text_input('Informe a nova data da apresentação',op.get_data() if op!=None else None)
+        data = st.text_input('Informe a nova data da apresentação',op.get_data().strftime("%d/%m/%Y %H:%M") if op!=None else None)
         if st.button('Atualizar'):    
             View.apresentacao_atualizar(id,id_banda.get_id(),id_cidade.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"),False)
             st.success('Apresentação atualizada com sucesso')

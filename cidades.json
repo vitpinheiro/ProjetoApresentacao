@@ -2,5 +2,45 @@
     {
         "id": 1,
         "nome": "Natal"
+    },
+    {
+        "id": 2,
+        "nome": "Fortaleza"
+    },
+    {
+        "id": 3,
+        "nome": "Jo\u00e3o Pessoa"
+    },
+    {
+        "id": 5,
+        "nome": "Recife"
+    },
+    {
+        "id": 6,
+        "nome": "Mossor\u00f3"
+    },
+    {
+        "id": 7,
+        "nome": "Salvador"
+    },
+    {
+        "id": 8,
+        "nome": "S\u00e3o Lu\u00eds"
+    },
+    {
+        "id": 9,
+        "nome": "Macei\u00f3"
+    },
+    {
+        "id": 10,
+        "nome": "Teresina"
+    },
+    {
+        "id": 11,
+        "nome": "Aracaju "
+    },
+    {
+        "id": 12,
+        "nome": "Campina grande"
     }
 ]
