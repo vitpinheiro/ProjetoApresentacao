@@ -6,7 +6,7 @@ import time
 class ApresentacaoHorarioUI:
     @staticmethod
     def main():
-        st.header('apresentacaor uma apresentação')
+        st.header('Agendar uma apresentação')
         tab1, tab2= st.tabs(["Disponíveis", "Solicitadas"])
         with tab1:
             ApresentacaoHorarioUI.disponiveis()

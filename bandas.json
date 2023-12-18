@@ -38,5 +38,45 @@
         "fone": "40048922",
         "email": "pontodeequilibrio@gmail.com",
         "senha": "1234"
+    },
+    {
+        "id": 6,
+        "id_genero": 1,
+        "nome": "Moby Dick",
+        "fone": "40028922",
+        "email": "a",
+        "senha": "a"
+    },
+    {
+        "id": 7,
+        "id_genero": 1,
+        "nome": "Moby Dick",
+        "fone": "40028922",
+        "email": "a",
+        "senha": "a"
+    },
+    {
+        "id": 8,
+        "id_genero": 1,
+        "nome": "Moby Dick",
+        "fone": "40028922",
+        "email": "a",
+        "senha": "a"
+    },
+    {
+        "id": 9,
+        "id_genero": 1,
+        "nome": "Moby Dick",
+        "fone": "40028922",
+        "email": "a",
+        "senha": "a"
+    },
+    {
+        "id": 10,
+        "id_genero": 1,
+        "nome": "Moby Dick",
+        "fone": "a",
+        "email": "40028922",
+        "senha": "a"
     }
 ]

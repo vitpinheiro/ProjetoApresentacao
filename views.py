@@ -24,14 +24,32 @@ class View:
 
     def banda_inserir(id_genero,nome,fone,email,senha):
         banda = Banda(0,id_genero,nome,fone,email,senha)
+        if id_genero == " ": raise ValueError()
+        if nome == " ": raise ValueError()
+        if fone == " ": raise ValueError()
+        if email == " ": raise ValueError()
+        if senha == " ": raise ValueError()
+        for x in View.banda_listar():
+            if x.get_email() == email:raise ValueError("email repetido")
         NBanda.inserir(banda)
+
+
+
     def banda_listar():
         return NBanda.listar()
     def banda_listar_id(id):
         return NBanda.listar_id(id)
+
     def banda_atualizar(id,id_genero,nome,fone,email,senha):
         banda = Banda(id,id_genero,nome,fone,email,senha)
+        if id_genero == " ": raise ValueError()
+        if nome == " ": raise ValueError()
+        if fone == " ": raise ValueError()
+        if email == " ": raise ValueError()
+        if senha == " ": raise ValueError()
         NBanda.atualizar(banda)
+
+
     def banda_excluir(id):
         banda = Banda(id,"","","","","")
         NBanda.excluir(banda)

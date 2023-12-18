@@ -21,8 +21,12 @@ class ManterApresentacaoUI:
         id_banda = st.selectbox('Bandas',bandas,index=None,placeholder='Escolha uma banda')
         data = st.text_input('Informe a data da apresentação')
         if st.button('Inserir'):    
-            View.apresentacao_inserir(id_cidade.get_id(),id_banda.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"),False)
-            st.success('Apresentação inserida com sucesso')
+            try:
+                View.apresentacao_inserir(id_cidade.get_id(),id_banda.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"),False)
+                st.success('Apresentação inserida com sucesso')
+            except:
+                st.error("Data inválida")    
+                
     def listar():
         apresentacoes = View.apresentacao_listar()
         if len(apresentacoes)==0:
