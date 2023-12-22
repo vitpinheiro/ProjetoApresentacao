@@ -17,12 +17,18 @@ class ManterApresentacaoUI:
     def inserir():
         cidades = View.cidade_listar()
         bandas =  View.banda_listar()
-        id_cidade = st.selectbox('Cidades',cidades,index=None,placeholder='Escolha uma cidade')
         id_banda = st.selectbox('Bandas',bandas,index=None,placeholder='Escolha uma banda')
+        id_cidade = st.selectbox('Cidades',cidades,index=None,placeholder='Escolha uma cidade')
         data = st.text_input('Informe a data da apresentação')
         if st.button('Inserir'):    
-            View.apresentacao_inserir(id_cidade.get_id(),id_banda.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"),False)
-            st.success('Apresentação inserida com sucesso')
+            try:
+                id_cidade= None if id_cidade is None else id_cidade.get_id()
+                id_banda = None if id_banda is None else id_banda.get_id()
+                View.apresentacao_inserir(id_banda,id_cidade,data,False)
+                st.success('Apresentação inserida com sucesso')
+            except ValueError as erro:
+                st.error(erro)    
+                
     def listar():
         apresentacoes = View.apresentacao_listar()
         if len(apresentacoes)==0:
@@ -54,10 +60,15 @@ class ManterApresentacaoUI:
             id_cidade = st.selectbox('Cidades',cidades,index=None,placeholder='Escolha uma cidade',key='select_cidade_index')
             
         id= op.get_id() if op!=None else None
-        data = st.text_input('Informe a nova data da apresentação',op.get_data() if op!=None else None)
-        if st.button('Atualizar'):    
-            View.apresentacao_atualizar(id,id_banda.get_id(),id_cidade.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"),False)
-            st.success('Apresentação atualizada com sucesso')
+        data = st.text_input('Informe a nova data da apresentação',op.get_data().strftime("%d/%m/%Y %H:%M") if op!=None else None)
+        if st.button('Atualizar'):
+            try:
+                id_cidade= None if id_cidade is None else id_cidade.get_id()
+                id_banda = None if id_banda is None else id_banda.get_id()
+                View.apresentacao_atualizar(id,id_banda,id_cidade,data,False)
+                st.success('Apresentação atualizada com sucesso')
+            except ValueError as erro:
+                st.error(erro)
     
     def excluir():
         apresentacoes = View.apresentacao_listar()
@@ -71,7 +82,6 @@ class ManterApresentacaoUI:
                     st.success('Apresentação excluído com sucesso')
                 else:
                     st.error('Selecione alguém para excluir')
-
 
 
 

@@ -25,7 +25,7 @@ class IndexUI:
 
   def menu_admin():
     op = st.sidebar.selectbox("Menu", ["Manter Apresentacoes", "Manter Bandas", 
-    "Manter Cidades","Manter Generos","Confirmar apresentacao","Editar perfil"])
+    "Manter Cidades","Manter Generos","Confirmar apresentacao","Editar perfil","Relatório"])
     if op == "Manter Apresentacoes": ManterApresentacaoUI.main()
     if op == "Manter Bandas": ManterBandaUI.main()
     if op == "Manter Cidades": ManterCidadeUI.main()
@@ -36,14 +36,14 @@ class IndexUI:
     if op == "Relatório" : RelatorioUI.main()
 
   def menu_banda():
-    op = st.sidebar.selectbox("Menu", ["Abrir Conta","Agendar apresentacao",
-    "Editar perfil","Editar Apresentacoes","Cancelar Apresentacao","Visualizar Apresentacoes","Apresentações Hoje","Relatório"])
+    op = st.sidebar.selectbox("Menu", ["Abrir Conta","Agendar Apresentações",
+    "Editar perfil","Editar Apresentações","Cancelar Apresentação","Visualizar Apresentações","Apresentações Hoje","Relatório"])
     if op == "Abrir Conta" : AbrirContaUI.main()
-    if op == "Agendar apresentacao" : ApresentacaoHorarioUI.main()
+    if op == "Agendar Apresentações" : ApresentacaoHorarioUI.main()
     if op == "Editar perfil" : EditarPerfilUI.main()
-    if op == "Editar Apresentacoes" : EditarApresentacoesUI.main()
-    if op == "Cancelar Apresentacao": CancelarApresentacaoUI.main()
-    if op == "Visualizar Apresentacoes" : VisualizarApresentacoesUI.main()
+    if op == "Editar Apresentações" : EditarApresentacoesUI.main()
+    if op == "Cancelar Apresentação": CancelarApresentacaoUI.main()
+    if op == "Visualizar Apresentações" : VisualizarApresentacoesUI.main()
     if op == "Apresentações Hoje" : ApresentacaoHojeUI.main()
     if op == "Relatório" : RelatorioUI.main()
   def btn_logout():
@@ -68,5 +68,4 @@ class IndexUI:
     IndexUI.sidebar()
 
 IndexUI.main()
-
 

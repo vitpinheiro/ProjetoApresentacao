@@ -1,8 +1,5 @@
 from datetime import datetime
 import json
-import streamlit as st
-
-
 class Apresentacao:
     def __init__(self,id,id_banda,id_cidade,data,confirmado):
         self.__id = id
@@ -42,69 +39,72 @@ class Apresentacao:
     def __str__(self):
         return f"{self.__id} - {self.__id_banda}  - {self.__id_cidade} - {self.get_data().strftime('%d/%m/%Y %H:%M')} - {self.__confirmado}"
     
-class NApresentacao:
-    __apresentacoes = []
+from abc import ABC, abstractclassmethod
+
+class NApresentacao(ABC):
+    objetos = []
+
     @classmethod
     def inserir(cls, obj):
         cls.abrir()
         id = 0
-        for apresentacao in cls.__apresentacoes:
-            id = apresentacao.get_id()
+        for aux in cls.objetos:
+            if aux.get_id() > id: 
+                id = aux.get_id()
         obj.set_id(id + 1)
-        cls.__apresentacoes.append(obj)
+        cls.objetos.append(obj)
         cls.salvar()
+
 
     @classmethod
     def listar(cls):
         cls.abrir()
-        return cls.__apresentacoes
-    
+        return cls.objetos
+
     @classmethod
-    def listar_id(cls,id):
+    def listar_id(cls, id):
         cls.abrir()
-        for apresentacao in cls.__apresentacoes:
-            if apresentacao.get_id()==id:
-                return apresentacao
+        for obj in cls.objetos:
+            if obj.get_id() == id: 
+                return obj
         return None
-    
-    @classmethod
-    def atualizar(cls,obj):
-        cls.abrir()
-        apresentacao = cls.listar_id(obj.get_id())
-        if apresentacao is not None:
-            apresentacao.set_id_banda(obj.get_id_banda())
-            apresentacao.set_id_cidade(obj.get_id_cidade())
-            apresentacao.set_data(obj.get_data())
-            apresentacao.set_confirmado(obj.get_confirmado())
-            cls.salvar()
 
-        
     @classmethod
-    def excluir(cls,obj):
+    def atualizar(cls, obj):
         cls.abrir()
-        apresentacao = cls.listar_id(obj.get_id())
-        if apresentacao is not None:
-            cls.__apresentacoes.remove(apresentacao)
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
+            cls.objetos.append(obj)
             cls.salvar()
 
     @classmethod
+    def excluir(cls, obj):
+        cls.abrir()
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
+            cls.salvar()
+
+
+    @abstractclassmethod
     def abrir(cls):
-        cls.__apresentacoes =[]
+        cls.objetos =[]
         try:
             with open("apresentacoes.json" , mode='r') as arquivo:
                 apresentacoes_json = json.load(arquivo)
                 for obj in apresentacoes_json:
                     obj["data"] = datetime.strptime(obj["data"], '%d/%m/%Y %H:%M')
                     a = Apresentacao(obj["id"], obj["id_banda"], obj["id_cidade"], obj["data"], obj["confirmado"])                    
-                    cls.__apresentacoes.append(a)
+                    cls.objetos.append(a)
         except FileNotFoundError:
             pass
 
-    @classmethod
+    @abstractclassmethod
     def salvar(cls):
         apresentacoes_salvar = []
         with open("apresentacoes.json",mode="w") as arquivo:
-            for apresentacao in cls.__apresentacoes:
+            for apresentacao in cls.objetos:
                 apresentacoes_salvar.append(apresentacao.to_json())
             json.dump(apresentacoes_salvar,arquivo,indent=4)
 

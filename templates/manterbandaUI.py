@@ -23,8 +23,13 @@ class ManterBandaUI:
         email = st.text_input('Informe o email')
         senha = st.text_input('Informe a senha',type="password")
         if st.button('Inserir'):    
-            View.banda_inserir(id_genero.get_id(),nome,fone,email,senha)
-            st.success('Banda inserido com sucesso')
+            try:
+                id_genero = None if id_genero is None else id_genero.get_id()
+                View.banda_inserir(id_genero,nome,fone,email,senha)
+                st.success('Banda inserido com sucesso')
+            except ValueError as erro: 
+                st.error(erro)
+
     def listar():
         bandas = View.banda_listar()
         if len(bandas)==0:
@@ -52,9 +57,13 @@ class ManterBandaUI:
         fone  = st.text_input('Informe o novo telefone',op.get_fone() if op!=None else None)
         email = st.text_input('Informe o novo email',op.get_email() if op!=None else None)
         senha = st.text_input('Informe a nova senha',type="password")
-        if st.button('Atualizar'):    
-            View.banda_atualizar(id,id_genero.get_id(),nome,fone,email,senha)
-            st.success('Banda atualizado com sucesso')
+        if st.button('Atualizar'):
+            try:
+                id_genero = None if id_genero is None else id_genero.get_id()
+                View.banda_atualizar(id,id_genero.get_id(),nome,fone,email,senha)
+                st.success('Banda atualizado com sucesso')
+            except ValueError as erro:
+                st.error(erro)
     
     def excluir():
         bandas= View.banda_listar()
@@ -68,7 +77,6 @@ class ManterBandaUI:
                     st.success('Banda excluído com sucesso')
                 else:
                     st.error('Selecione alguém para excluir')
-
 
 
 

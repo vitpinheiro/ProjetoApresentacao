@@ -25,68 +25,68 @@ class Cidade:
 
     def __str__(self):
         return f"{self.__id} - {self.__nome}"
-
-class NCidade:
-    __cidades = []
+from abc import ABC, abstractclassmethod
+class NCidade(ABC):
+    objetos = []
 
     @classmethod
     def inserir(cls, obj):
         cls.abrir()
         id = 0
-        for cidade in cls.__cidades:
-            if cidade.get_id() > id:
-                id = cidade.get_id()
+        for aux in cls.objetos:
+            if aux.get_id() > id: 
+                id = aux.get_id()
         obj.set_id(id + 1)
-        cls.__cidades.append(obj)
+        cls.objetos.append(obj)
         cls.salvar()
 
     @classmethod
     def listar(cls):
         cls.abrir()
-        return cls.__cidades
+        return cls.objetos
 
     @classmethod
     def listar_id(cls, id):
         cls.abrir()
-        for cidade in cls.__cidades:
-            if cidade.get_id() == id:
-                return cidade
+        for obj in cls.objetos:
+            if obj.get_id() == id: 
+                return obj
         return None
-
 
     @classmethod
     def atualizar(cls, obj):
         cls.abrir()
-        cidade = cls.listar_id(obj.get_id())
-        if cidade is not None:
-            cidade.set_nome(obj.get_nome())
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
+            cls.objetos.append(obj)
             cls.salvar()
 
     @classmethod
     def excluir(cls, obj):
         cls.abrir()
-        cidade = cls.listar_id(obj.get_id())
-        if cidade is not None:
-            cls.__cidades.remove(cidade)
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
             cls.salvar()
 
-    @classmethod
+    @abstractclassmethod
     def abrir(cls):
-        cls.__cidades = []
+        cls.objetos = []
         try:
             with open("cidades.json", mode='r') as arquivo:
                 cidades_json = json.load(arquivo)
                 for obj in cidades_json:
                     c = Cidade(obj["id"], obj["nome"])
-                    cls.__cidades.append(c)
+                    cls.objetos.append(c)
         except FileNotFoundError:
             pass
 
-    @classmethod
+    @abstractclassmethod
     def salvar(cls):
         cidades_salvar = []
         with open("cidades.json", mode="w") as arquivo:
-            for cidade in cls.__cidades:
+            for cidade in cls.objetos:
                 cidades_salvar.append(cidade.to_json())
             json.dump(cidades_salvar, arquivo, indent=4)
 

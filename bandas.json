@@ -27,8 +27,8 @@
         "id": 4,
         "id_genero": 1,
         "nome": "Moby Dick",
-        "fone": "40028923",
-        "email": "a",
+        "fone": "n",
+        "email": "am",
         "senha": "a"
     },
     {
@@ -38,5 +38,13 @@
         "fone": "40048922",
         "email": "pontodeequilibrio@gmail.com",
         "senha": "1234"
+    },
+    {
+        "id": 6,
+        "id_genero": 1,
+        "nome": "Let's go",
+        "fone": "(84) 99100-1019",
+        "email": "a",
+        "senha": "a"
     }
 ]

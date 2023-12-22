@@ -10,16 +10,12 @@ class ConfirmarAgendamentoUI:
         st.header('Confirmar agendamento')
         ConfirmarAgendamentoUI.confimar()
     def confimar():
-        lista_solicitacao = []
-        for apresentacao in View.apresentacao_listar():
-            hoje= datetime.today()
-            if apresentacao.get_data()> hoje  and apresentacao.get_id_banda!=0 and apresentacao.get_id_cidade()!=0 and apresentacao.get_confirmado()==False:
-                lista_solicitacao.append(apresentacao.to_json())
+        apresentacoes_solicitadas = View.apresentacoes_solicitadas(st.session_state["usuario_id"])
 
-        if len(lista_solicitacao)==0:
+        if len(apresentacoes_solicitadas)==0:
             st.write('Nenhuma solicitação feita')
         else:
-            df = pd.DataFrame(lista_solicitacao)
+            df = pd.DataFrame(apresentacoes_solicitadas)
 
             st.data_editor(
                 df,
@@ -32,10 +28,10 @@ class ConfirmarAgendamentoUI:
                 hide_index=True,)
             editor = st.session_state["my_key"]["edited_rows"]
             if editor:
-                for a in lista_solicitacao:
-                    apresentacao = lista_solicitacao.index(a)
+                for a in apresentacoes_solicitadas:
+                    apresentacao = apresentacoes_solicitadas.index(a)
                     if editor[apresentacao]['confirmado']==True:
-                      View.apresentacao_atualizar(a["id"],a["id_banda"],a["id_cidade"],datetime.strptime(a["data"], "%d/%m/%Y %H:%M"),True)
+                      View.apresentacao_atualizar(a["id"],a["id_banda"],a["id_cidade"],a["data"],True)
                       st.success('Apresentação confirmada com sucesso')
                       time.sleep(1)
                       st.rerun()

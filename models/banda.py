@@ -40,73 +40,75 @@ class Banda:
     def __str__(self):
         return f"{self.__id} - {self.__id_genero} - {self.__nome} - {self.__fone} - {self.__email} - {self.__senha}"
     
-class NBanda:
-    __bandas = []
+from abc import ABC, abstractclassmethod
+
+class NBanda(ABC):
+    objetos = []
+
     @classmethod
-    def inserir(cls,obj):
+    def inserir(cls, obj):
         cls.abrir()
         id=0
         if obj.get_nome()=="admin":
             obj.set_id(id)
-            cls.__bandas.append(obj)
+            cls.objetos.append(obj)
             cls.salvar()
         else:
-            for banda in cls.__bandas:
-                id = banda.get_id()
+            for aux in cls.objetos:
+                if aux.get_id() > id: 
+                    id = aux.get_id()
             obj.set_id(id+1)
-            cls.__bandas.append(obj)
+            cls.objetos.append(obj)
             cls.salvar()
+
 
     @classmethod
     def listar(cls):
         cls.abrir()
-        return cls.__bandas
-    
+        return cls.objetos
+
     @classmethod
-    def listar_id(cls,id):
+    def listar_id(cls, id):
         cls.abrir()
-        for banda in cls.__bandas:
-            if banda.get_id()==id:
-                return banda
-        return
-    
+        for obj in cls.objetos:
+            if obj.get_id() == id: 
+                return obj
+        return None
+
     @classmethod
-    def atualizar(cls,obj):
+    def atualizar(cls, obj):
         cls.abrir()
-        banda = cls.listar_id(obj.get_id())
-        if banda!=None:
-            banda.set_id_genero(obj.get_id_genero())
-            banda.set_nome(obj.get_nome())
-            banda.set_fone(obj.get_fone())
-            banda.set_email(obj.get_email())
-            banda.set_senha(obj.get_senha())
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
+            cls.objetos.append(obj)
             cls.salvar()
 
     @classmethod
-    def excluir(cls,obj):
+    def excluir(cls, obj):
         cls.abrir()
-        banda = cls.listar_id(obj.get_id())
-        if banda is not None:
-            cls.__bandas.remove(banda)
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
             cls.salvar()
 
-    @classmethod
+    @abstractclassmethod
     def abrir(cls):
-        cls.__bandas =[]
+        cls.objetos =[]
         try:
             with open("bandas.json" , mode='r') as arquivo:
                 bandas_json = json.load(arquivo)
                 for obj in bandas_json:
                     b = Banda(obj["id"],obj["id_genero"],obj["nome"],obj["fone"],obj["email"],obj["senha"])
-                    cls.__bandas.append(b)
+                    cls.objetos.append(b)
         except FileNotFoundError:
             pass
 
-    @classmethod
+    @abstractclassmethod
     def salvar(cls):
         bandas_salvar = []
         with open("bandas.json",mode="w") as arquivo:
-            for banda in cls.__bandas:
+            for banda in cls.objetos:
                 bandas_salvar.append(banda.to_json())
             json.dump(bandas_salvar,arquivo,indent=4)
         

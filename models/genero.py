@@ -25,63 +25,70 @@ class Genero:
     def __str__(self):
         return f"{self.__id} - {self.__nome}"
     
-class NGenero:
-    __generos = []
+from abc import ABC, abstractclassmethod
+
+class NGenero(ABC):
+    objetos = []
+
     @classmethod
-    def inserir(cls,obj):
+    def inserir(cls, obj):
         cls.abrir()
         id=0
-        for genero in cls.__generos:
-            id = genero.get_id()
+        for aux in cls.objetos:
+            for aux in cls.objetos:
+                if aux.get_id() > id: 
+                    id = aux.get_id()
         obj.set_id(id+1)
-        cls.__generos.append(obj)
+        cls.objetos.append(obj)
         cls.salvar()
+
 
     @classmethod
     def listar(cls):
         cls.abrir()
-        return cls.__generos
-    
+        return cls.objetos
+
     @classmethod
-    def listar_id(cls,id):
+    def listar_id(cls, id):
         cls.abrir()
-        for genero in cls.__generos:
-            if genero.get_id()==id:
-                return genero
+        for obj in cls.objetos:
+            if obj.get_id() == id: 
+                return obj
         return None
-    
+
     @classmethod
-    def atualizar(cls,obj):
+    def atualizar(cls, obj):
         cls.abrir()
-        genero = cls.listar_id(obj.get_id())
-        if genero is not None:
-            genero.set_nome(obj.get_nome())
-            cls.salvar()
-        
-    @classmethod
-    def excluir(cls,obj):
-        cls.abrir()
-        genero = cls.listar_id(obj.get_id())
-        if genero is not None:
-            cls.__generos.remove(genero)
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
+            cls.objetos.append(obj)
             cls.salvar()
 
     @classmethod
+    def excluir(cls, obj):
+        cls.abrir()
+        aux = cls.listar_id(obj.get_id())
+        if aux is not None:
+            cls.objetos.remove(aux)
+            cls.salvar()
+
+    @abstractclassmethod
     def abrir(cls):
-        cls.__generos = []
+        cls.objetos = []
         try:
             with open("generos.json", mode='r') as arquivo:
                 generos_json = json.load(arquivo)
                 for obj in generos_json:
                     g = Genero(obj["id"], obj["nome"])
-                    cls.__generos.append(g)
+                    cls.objetos.append(g)
         except FileNotFoundError:
             pass
-    @classmethod
+    @abstractclassmethod
     def salvar(cls):
         generos_salvar = []
         with open("generos.json",mode="w") as arquivo:
-            for genero in cls.__generos:
+            for genero in cls.objetos:
                 generos_salvar.append(genero.to_json())
             json.dump(generos_salvar,arquivo,indent=4)
         
