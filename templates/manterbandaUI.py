@@ -24,11 +24,17 @@ class ManterBandaUI:
         senha = st.text_input('Informe a senha',type="password")
         if st.button('Inserir'):    
             try:
+<<<<<<< HEAD
                 id_genero = None if id_genero is None else id_genero.get_id()
                 View.banda_inserir(id_genero,nome,fone,email,senha)
                 st.success('Banda inserido com sucesso')
             except ValueError as erro: 
                 st.error(erro)
+=======
+                View.banda_inserir(id_genero.get_id(),nome,fone,email,senha)
+                st.success('Banda inserido com sucesso')
+            except: st.error("erro ao cadastrar")
+>>>>>>> aa144165d42653ebc70ad8f9335cd6be3f3c367a
 
     def listar():
         bandas = View.banda_listar()

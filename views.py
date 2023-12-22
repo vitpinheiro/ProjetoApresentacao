@@ -49,6 +49,13 @@ class View:
                 raise ValueError("Email repetido")
         if senha == "": raise ValueError('Senha Inválida')
         banda = Banda(0,id_genero,nome,fone,email,senha)
+        if id_genero == " ": raise ValueError()
+        if nome == " ": raise ValueError()
+        if fone == " ": raise ValueError()
+        if email == " ": raise ValueError()
+        if senha == " ": raise ValueError()
+        for x in View.banda_listar():
+            if x.get_email() == email:raise ValueError("email repetido")
         NBanda.inserir(banda)
 
 
@@ -68,6 +75,11 @@ class View:
                 raise ValueError("Email repetido")
         if senha == "": raise ValueError('Senha Inválida')
         banda = Banda(id,id_genero,nome,fone,email,senha)
+        if id_genero == " ": raise ValueError()
+        if nome == " ": raise ValueError()
+        if fone == " ": raise ValueError()
+        if email == " ": raise ValueError()
+        if senha == " ": raise ValueError()
         NBanda.atualizar(banda)
 
 

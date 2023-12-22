@@ -22,12 +22,19 @@ class ManterApresentacaoUI:
         data = st.text_input('Informe a data da apresentação')
         if st.button('Inserir'):    
             try:
+<<<<<<< HEAD
                 id_cidade= None if id_cidade is None else id_cidade.get_id()
                 id_banda = None if id_banda is None else id_banda.get_id()
                 View.apresentacao_inserir(id_banda,id_cidade,data,False)
                 st.success('Apresentação inserida com sucesso')
             except ValueError as erro:
                 st.error(erro)    
+=======
+                View.apresentacao_inserir(id_cidade.get_id(),id_banda.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"),False)
+                st.success('Apresentação inserida com sucesso')
+            except:
+                st.error("Data inválida")    
+>>>>>>> aa144165d42653ebc70ad8f9335cd6be3f3c367a
                 
     def listar():
         apresentacoes = View.apresentacao_listar()

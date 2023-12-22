@@ -19,7 +19,15 @@ class AbrirContaUI:
             st.success("Conta criada com sucesso")
             time.sleep(2)
             st.rerun()
+<<<<<<< HEAD
           except ValueError as erro:
             st.error(erro)
             
     
+=======
+          except ValueError:
+            st.error("E-mail já utilizado")
+            # View.banda_inserir(id_genero.get_id(),nome,fone,email,senha)
+            # st.success('Banda inserido com sucesso')
+           
+>>>>>>> aa144165d42653ebc70ad8f9335cd6be3f3c367a
