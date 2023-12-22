@@ -1,4 +1,5 @@
 import json
+from models.modelo import Modelo
 class Banda:
     def __init__(self,id,id_genero,nome,fone,email,senha):
         self.__id = id
@@ -40,59 +41,9 @@ class Banda:
     def __str__(self):
         return f"{self.__id} - {self.__id_genero} - {self.__nome} - {self.__fone} - {self.__email} - {self.__senha}"
     
-from abc import ABC, abstractclassmethod
-
-class NBanda(ABC):
-    objetos = []
+class NBanda(Modelo):
 
     @classmethod
-    def inserir(cls, obj):
-        cls.abrir()
-        id=0
-        if obj.get_nome()=="admin":
-            obj.set_id(id)
-            cls.objetos.append(obj)
-            cls.salvar()
-        else:
-            for aux in cls.objetos:
-                if aux.get_id() > id: 
-                    id = aux.get_id()
-            obj.set_id(id+1)
-            cls.objetos.append(obj)
-            cls.salvar()
-
-
-    @classmethod
-    def listar(cls):
-        cls.abrir()
-        return cls.objetos
-
-    @classmethod
-    def listar_id(cls, id):
-        cls.abrir()
-        for obj in cls.objetos:
-            if obj.get_id() == id: 
-                return obj
-        return None
-
-    @classmethod
-    def atualizar(cls, obj):
-        cls.abrir()
-        aux = cls.listar_id(obj.get_id())
-        if aux is not None:
-            cls.objetos.remove(aux)
-            cls.objetos.append(obj)
-            cls.salvar()
-
-    @classmethod
-    def excluir(cls, obj):
-        cls.abrir()
-        aux = cls.listar_id(obj.get_id())
-        if aux is not None:
-            cls.objetos.remove(aux)
-            cls.salvar()
-
-    @abstractclassmethod
     def abrir(cls):
         cls.objetos =[]
         try:
@@ -104,7 +55,7 @@ class NBanda(ABC):
         except FileNotFoundError:
             pass
 
-    @abstractclassmethod
+    @classmethod
     def salvar(cls):
         bandas_salvar = []
         with open("bandas.json",mode="w") as arquivo:

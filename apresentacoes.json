@@ -96,5 +96,19 @@
         "id_cidade": 3,
         "data": "22/12/2023 10:10",
         "confirmado": true
+    },
+    {
+        "id": 15,
+        "id_banda": 6,
+        "id_cidade": 1,
+        "data": "22/12/2023 10:10",
+        "confirmado": true
+    },
+    {
+        "id": 16,
+        "id_banda": 6,
+        "id_cidade": 2,
+        "data": "22/12/2023 22:00",
+        "confirmado": true
     }
 ]

@@ -4,7 +4,7 @@ import time
 class EditarPerfilUI:
     @staticmethod
     def main():
-        st.header('Login')
+        st.header('Editar Perfil')
         EditarPerfilUI.editar()
     def editar():
         if st.session_state["usuario_id"]!=0:

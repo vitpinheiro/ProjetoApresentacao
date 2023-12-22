@@ -42,48 +42,9 @@
     {
         "id": 6,
         "id_genero": 1,
-<<<<<<< HEAD
         "nome": "Let's go",
         "fone": "(84) 99100-1019",
         "email": "a",
         "senha": "a"
-=======
-        "nome": "Moby Dick",
-        "fone": "40028922",
-        "email": "a",
-        "senha": "a"
-    },
-    {
-        "id": 7,
-        "id_genero": 1,
-        "nome": "Moby Dick",
-        "fone": "40028922",
-        "email": "a",
-        "senha": "a"
-    },
-    {
-        "id": 8,
-        "id_genero": 1,
-        "nome": "Moby Dick",
-        "fone": "40028922",
-        "email": "a",
-        "senha": "a"
-    },
-    {
-        "id": 9,
-        "id_genero": 1,
-        "nome": "Moby Dick",
-        "fone": "40028922",
-        "email": "a",
-        "senha": "a"
-    },
-    {
-        "id": 10,
-        "id_genero": 1,
-        "nome": "Moby Dick",
-        "fone": "a",
-        "email": "40028922",
-        "senha": "a"
->>>>>>> aa144165d42653ebc70ad8f9335cd6be3f3c367a
     }
 ]

@@ -1,5 +1,5 @@
 import json
-import datetime
+from models.modelo import Modelo
 
 class Cidade:
     def __init__(self, id, nome):
@@ -25,52 +25,9 @@ class Cidade:
 
     def __str__(self):
         return f"{self.__id} - {self.__nome}"
-from abc import ABC, abstractclassmethod
-class NCidade(ABC):
-    objetos = []
 
+class NCidade(Modelo):
     @classmethod
-    def inserir(cls, obj):
-        cls.abrir()
-        id = 0
-        for aux in cls.objetos:
-            if aux.get_id() > id: 
-                id = aux.get_id()
-        obj.set_id(id + 1)
-        cls.objetos.append(obj)
-        cls.salvar()
-
-    @classmethod
-    def listar(cls):
-        cls.abrir()
-        return cls.objetos
-
-    @classmethod
-    def listar_id(cls, id):
-        cls.abrir()
-        for obj in cls.objetos:
-            if obj.get_id() == id: 
-                return obj
-        return None
-
-    @classmethod
-    def atualizar(cls, obj):
-        cls.abrir()
-        aux = cls.listar_id(obj.get_id())
-        if aux is not None:
-            cls.objetos.remove(aux)
-            cls.objetos.append(obj)
-            cls.salvar()
-
-    @classmethod
-    def excluir(cls, obj):
-        cls.abrir()
-        aux = cls.listar_id(obj.get_id())
-        if aux is not None:
-            cls.objetos.remove(aux)
-            cls.salvar()
-
-    @abstractclassmethod
     def abrir(cls):
         cls.objetos = []
         try:
@@ -82,7 +39,7 @@ class NCidade(ABC):
         except FileNotFoundError:
             pass
 
-    @abstractclassmethod
+    @classmethod
     def salvar(cls):
         cidades_salvar = []
         with open("cidades.json", mode="w") as arquivo:
