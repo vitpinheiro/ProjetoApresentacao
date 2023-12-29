@@ -27,8 +27,12 @@ class ManterBandaUI:
                 id_genero = None if id_genero is None else id_genero.get_id()
                 View.banda_inserir(id_genero,nome,fone,email,senha)
                 st.success('Banda inserido com sucesso')
+                
+
             except ValueError as erro: 
                 st.error(erro)
+                
+
 
     def listar():
         bandas = View.banda_listar()
@@ -62,8 +66,12 @@ class ManterBandaUI:
                 id_genero = None if id_genero is None else id_genero.get_id()
                 View.banda_atualizar(id,id_genero.get_id(),nome,fone,email,senha)
                 st.success('Banda atualizado com sucesso')
+                
+
             except ValueError as erro:
                 st.error(erro)
+                
+
     
     def excluir():
         bandas= View.banda_listar()
@@ -75,8 +83,12 @@ class ManterBandaUI:
                 if op!=None:
                     View.banda_excluir(op.get_id())
                     st.success('Banda excluído com sucesso')
+                    
+
                 else:
                     st.error('Selecione alguém para excluir')
+                    
+
 
 
 

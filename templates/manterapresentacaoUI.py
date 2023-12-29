@@ -26,8 +26,12 @@ class ManterApresentacaoUI:
                 id_banda = None if id_banda is None else id_banda.get_id()
                 View.apresentacao_inserir(id_banda,id_cidade,data,False)
                 st.success('Apresentação inserida com sucesso')
+                
+
             except ValueError as erro:
-                st.error(erro)    
+                st.error(erro)
+                
+    
                 
     def listar():
         apresentacoes = View.apresentacao_listar()
@@ -67,8 +71,11 @@ class ManterApresentacaoUI:
                 id_banda = None if id_banda is None else id_banda.get_id()
                 View.apresentacao_atualizar(id,id_banda,id_cidade,data,False)
                 st.success('Apresentação atualizada com sucesso')
+                
             except ValueError as erro:
                 st.error(erro)
+                
+
     
     def excluir():
         apresentacoes = View.apresentacao_listar()
@@ -80,8 +87,11 @@ class ManterApresentacaoUI:
                 if op!=None:
                     View.apresentacao_excluir(op.get_id())
                     st.success('Apresentação excluído com sucesso')
+                    
                 else:
                     st.error('Selecione alguém para excluir')
+                    
+
 
 
 

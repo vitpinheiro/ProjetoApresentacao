@@ -1,9 +1,5 @@
 [
     {
-        "id": 1,
-        "nome": "Natal"
-    },
-    {
         "id": 2,
         "nome": "Fortaleza"
     },
@@ -46,5 +42,13 @@
     {
         "id": 12,
         "nome": "Campina grande"
+    },
+    {
+        "id": 13,
+        "nome": "Caic\u00f3"
+    },
+    {
+        "id": 1,
+        "nome": "Londres"
     }
 ]

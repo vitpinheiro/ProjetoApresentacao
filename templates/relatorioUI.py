@@ -36,10 +36,10 @@ class RelatorioUI:
         meses = ['Janeiro','Fevereiro','Março','Abril','Maio','Junho','Julho','Agosto'
                  ,"Setembro","Outubro","Novembro","Dezembro"]
         data_mes = pd.DataFrame({
-            'Meses': pd.Categorical(meses, categories=meses, ordered=True),
+            'Mes': pd.Categorical(meses, categories=meses, ordered=True),
             'Qtd de apresentações': datas
         })
-        st.bar_chart(data_mes, x='Meses', y='Qtd de apresentações')
+        st.bar_chart(data_mes, x='Mes', y='Qtd de apresentações')
     def listar_cidade():
 
         st.subheader('Apresentações por cidade')
@@ -48,6 +48,7 @@ class RelatorioUI:
         op = st.selectbox('Anos',anos,index=0,placeholder='Selecione um ano',key='selection_cidade')
 
         cidades_total=View.relatorio_cidades(st.session_state["usuario_id"],op)
+        
        
 
         data_mes = pd.DataFrame({
@@ -74,8 +75,8 @@ class RelatorioUI:
 
         data_genero = pd.DataFrame({
             'Nome': genero_total[0],
-            'Qtd de apresentações': genero_total[1]
+            'Qtd de bandas': genero_total[1]
         })
-        st.bar_chart(data_genero, x='Nome', y='Qtd de apresentações')
+        st.bar_chart(data_genero, x='Nome', y='Qtd de bandas')
         
         

@@ -24,11 +24,9 @@ class AbrirAgendaUI:
 
                 View.abrir_apresentacao_do_dia(data_ini,data_final,int(intervalo))
                 st.success('inserido')
-                time.sleep(1)
-                st.rerun()
+               
             except ValueError:
                 st.error('Campo(s) inválidos')
-                time.sleep(1)
-                st.rerun()
+
         
             

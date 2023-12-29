@@ -33,8 +33,7 @@ class ConfirmarAgendamentoUI:
                     if editor[apresentacao]['confirmado']==True:
                       View.apresentacao_atualizar(a["id"],a["id_banda"],a["id_cidade"],a["data"],True)
                       st.success('Apresentação confirmada com sucesso')
-                      time.sleep(1)
-                      st.rerun()
+                      
 
                 
                  

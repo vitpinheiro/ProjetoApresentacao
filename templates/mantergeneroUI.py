@@ -18,6 +18,8 @@ class ManterGeneroUI:
         if st.button('Inserir'):    
             View.genero_inserir(nome)
             st.success('Gênero inserido com sucesso')
+            
+
     def listar():
         generos = View.genero_listar()
         if len(generos)==0:
@@ -36,6 +38,8 @@ class ManterGeneroUI:
         if st.button('Atualizar'):    
             View.genero_atualizar(id,nome)
             st.success('Gênero atualizado com sucesso')
+            
+
     
     def excluir():
         generos = View.genero_listar()
@@ -47,8 +51,12 @@ class ManterGeneroUI:
                 if op!=None:
                     View.genero_excluir(op.get_id())
                     st.success('Gênero excluído com sucesso')
+                    
+
                 else:
                     st.error('Selecione algum gênero excluir')
+                    
+
 
 
 

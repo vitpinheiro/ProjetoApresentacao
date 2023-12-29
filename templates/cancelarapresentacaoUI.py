@@ -6,12 +6,14 @@ class CancelarApresentacaoUI:
         st.header('Cancelar apresentações')
         CancelarApresentacaoUI.cancelar()
     def cancelar():
-        usuario = View.banda_listar_id(st.session_state["usuario_id"])
-        apresentacoes_usuario=[]
-        for x in View.apresentacao_listar():
-            if usuario.get_id()==x.get_id_banda():
-                apresentacoes_usuario.append(x)
+        usuario=st.session_state["usuario_id"]
+        apresentacoes_usuario = View.apresentacoes_pendentes_todas(usuario)
         op = st.selectbox('Apresentações',apresentacoes_usuario,index=None,placeholder='Escolha uma apresentação')
         if st.button('cancelar'):
-            View.apresentacao_excluir(op.get_id())
-            st.success('Apresentação cancelada com sucesso')
+            if op!=None:
+                View.apresentacao_excluir(op.get_id())
+                st.success('Apresentação cancelada com sucesso')
+                
+            else:
+                st.error('Selecione uma apresentação')
+

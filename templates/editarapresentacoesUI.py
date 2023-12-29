@@ -9,19 +9,8 @@ class EditarApresentacoesUI:
         st.header('Editar Apresentação')
         EditarApresentacoesUI.editar()
     def editar():
-        usuario = View.banda_listar_id(st.session_state["usuario_id"])
-        apresentacoes_usuario=[]
-        for x in View.apresentacao_listar():
-            if usuario.get_id()==x.get_id_banda():
-                apresentacoes_usuario.append(x)
-    
-        hoje = datetime.today()
-        semana = datetime.today() + timedelta(days=7)
-        lista_disponivel = []
-        for apresentacao in View.apresentacao_listar():
-            if hoje<apresentacao.get_data()<semana and apresentacao.get_confirmado() == False:
-                if  apresentacao.get_id_banda() == 0 and apresentacao.get_id_cidade() == 0:
-                    lista_disponivel.append(apresentacao.get_data())
+        usuario=st.session_state["usuario_id"]
+        apresentacoes_usuario = View.apresentacoes_pendentes_todas(usuario)
 
         cidades= View.cidade_listar()
         op = st.selectbox('Apresentações',apresentacoes_usuario,index=None,placeholder='Escolha uma apresentação')
@@ -33,11 +22,13 @@ class EditarApresentacoesUI:
         data = st.text_input('Informe a nova data da apresentação',op.get_data().strftime("%d/%m/%Y %H:%M") if op!=None else None)
         if st.button('confirmar'):
             try:
-                View.apresentacao_atualizar(op.get_id(),usuario.get_id(), id_cidade.get_id(),datetime.strptime(data,"%d/%m/%Y %H:%M"), False)
-                st.success('Perfil atualizado com sucesso')
-                time.sleep(1)
+                View.apresentacao_atualizar(op.get_id(),usuario, id_cidade.get_id(),data, op.get_confirmado())
+                st.success('Apresentação atualizada com sucesso')
+              
+
             except ValueError as erro:
                 st.error(erro)
-                time.sleep(1)
+               
+
     
                     

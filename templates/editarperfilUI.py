@@ -20,12 +20,10 @@ class EditarPerfilUI:
                 try:
                     View.banda_atualizar(st.session_state["usuario_id"],id_genero.get_id(),nome,fone,email,senha)
                     st.success('Perfil atualizado com sucesso')
-                    time.sleep(1)
-                    st.rerun()
+                 
                 except ValueError as erro:
                     st.error(erro)
-                    time.sleep(1)
-                    st.rerun()
+                   
         else:
             email = st.text_input('Informe o novo email')
             fone = st.text_input('Informe o novo fone')
@@ -34,11 +32,10 @@ class EditarPerfilUI:
                 try:
                     View.banda_atualizar(0,0,"admin",fone,email,senha)
                     st.success('Perfil atualizado com sucesso')
-                    time.sleep(1)
-                    st.rerun()
+                    
                 except ValueError as erro:
                     st.error(erro)
-                    time.sleep(1)
-                    st.rerun()
+                    
+                    
 
                     

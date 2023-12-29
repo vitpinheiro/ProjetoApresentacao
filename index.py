@@ -20,7 +20,8 @@ class IndexUI:
 
   def menu_visitante():
     op = st.sidebar.selectbox("Menu", ["Login", "Abrir Conta"])
-    if op == "Login": LoginUI.main()
+    if op == "Login":
+      LoginUI.main()
     if op == "Abrir Conta" : AbrirContaUI.main()
 
   def menu_admin():
@@ -36,11 +37,11 @@ class IndexUI:
     if op == "Relatório" : RelatorioUI.main()
 
   def menu_banda():
-    op = st.sidebar.selectbox("Menu", ["Abrir Conta","Agendar Apresentações",
-    "Editar perfil","Editar Apresentações","Cancelar Apresentação","Visualizar Apresentações","Apresentações Hoje","Relatório"])
+    op = st.sidebar.selectbox("Menu", ["Abrir Conta","Editar perfil","Agendar Apresentações",
+    "Editar Apresentações","Cancelar Apresentação","Visualizar Apresentações","Apresentações Hoje","Relatório"])
     if op == "Abrir Conta" : AbrirContaUI.main()
-    if op == "Agendar Apresentações" : ApresentacaoHorarioUI.main()
     if op == "Editar perfil" : EditarPerfilUI.main()
+    if op == "Agendar Apresentações" : ApresentacaoHorarioUI.main()
     if op == "Editar Apresentações" : EditarApresentacoesUI.main()
     if op == "Cancelar Apresentação": CancelarApresentacaoUI.main()
     if op == "Visualizar Apresentações" : VisualizarApresentacoesUI.main()

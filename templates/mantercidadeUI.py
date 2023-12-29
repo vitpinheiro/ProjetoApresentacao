@@ -18,6 +18,7 @@ class ManterCidadeUI:
         if st.button('Inserir'):    
             View.cidade_inserir(nome)
             st.success('Cidade inserida com sucesso')
+            
     def listar():
         cidades = View.cidade_listar()
         if len(cidades)==0:
@@ -36,6 +37,7 @@ class ManterCidadeUI:
         if st.button('Atualizar'):    
             View.cidade_atualizar(id,nome)
             st.success('Cidade atualizada com sucesso')
+            
     
     def excluir():
         cidades = View.cidade_listar()
@@ -47,8 +49,12 @@ class ManterCidadeUI:
                 if op!=None:
                     View.cidade_excluir(op.get_id())
                     st.success('Cidade excluído com sucesso')
+                    
+
                 else:
                     st.error('Selecione alguma cidade para excluir')
+                    
+
 
 
 

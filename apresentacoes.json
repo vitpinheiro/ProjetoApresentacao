@@ -56,13 +56,6 @@
         "confirmado": true
     },
     {
-        "id": 9,
-        "id_banda": 6,
-        "id_cidade": 2,
-        "data": "12/10/2024 10:10",
-        "confirmado": true
-    },
-    {
         "id": 10,
         "id_banda": 1,
         "id_cidade": 5,
@@ -74,13 +67,6 @@
         "id_banda": 6,
         "id_cidade": 6,
         "data": "22/12/2023 10:10",
-        "confirmado": true
-    },
-    {
-        "id": 12,
-        "id_banda": 6,
-        "id_cidade": 1,
-        "data": "11/10/2024 10:10",
         "confirmado": true
     },
     {
@@ -110,5 +96,40 @@
         "id_cidade": 2,
         "data": "22/12/2023 22:00",
         "confirmado": true
+    },
+    {
+        "id": 17,
+        "id_banda": 6,
+        "id_cidade": 1,
+        "data": "11/10/2024 10:10",
+        "confirmado": true
+    },
+    {
+        "id": 19,
+        "id_banda": 7,
+        "id_cidade": 1,
+        "data": "11/01/2024 23:00",
+        "confirmado": true
+    },
+    {
+        "id": 20,
+        "id_banda": 7,
+        "id_cidade": 2,
+        "data": "11/02/2024 22:00",
+        "confirmado": true
+    },
+    {
+        "id": 21,
+        "id_banda": 7,
+        "id_cidade": 1,
+        "data": "11/04/2024 23:00",
+        "confirmado": true
+    },
+    {
+        "id": 22,
+        "id_banda": 7,
+        "id_cidade": 4,
+        "data": "29/12/2023 22:00",
+        "confirmado": false
     }
 ]

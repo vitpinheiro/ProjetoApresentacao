@@ -11,11 +11,11 @@ class VisualizarApresentacoesUI:
     @staticmethod
     def main():
         st.header('Visualizar apresentações')
-        tab1, tab2 = st.tabs(["Realizadas", "Pendentes"])
+        tab1, tab2 = st.tabs(["Pendentes", "Realizadas"])
         with tab1:
-            VisualizarApresentacoesUI.visualizar_realizados()
-        with tab2:
             VisualizarApresentacoesUI.visualizar_pendentes()
+        with tab2:
+            VisualizarApresentacoesUI.visualizar_realizados()
 
     @staticmethod
     def visualizar_realizados():
@@ -44,8 +44,8 @@ class VisualizarApresentacoesUI:
             st.dataframe(VisualizarApresentacoesUI.filter_dataframe(df, 'pendente'), hide_index=True)
 
     @staticmethod
-    def filter_dataframe(df: pd.DataFrame, col: str) -> pd.DataFrame:
-        modify = st.checkbox("Adicionar filtros", key=f'filtro_checkbox_{col}')
+    def filter_dataframe(df: pd.DataFrame, identifier: str) -> pd.DataFrame:
+        modify = st.checkbox("Adicionar filtros", key=f'filtro_checkbox_{identifier}')
 
         if not modify:
             return df
@@ -65,10 +65,10 @@ class VisualizarApresentacoesUI:
         modification_container = st.container()
 
         with modification_container:
-            to_filter_columns = st.multiselect("Filter dataframe on", df.columns)
+            to_filter_columns = st.multiselect(f"Filter dataframe on {identifier}", df.columns)
             for column in to_filter_columns:
                 left, right = st.columns((1, 20))
-                checkbox_key = f'filtro_checkbox_{column}'
+                checkbox_key = f'filtro_checkbox_{identifier}_{column}'
                 modify = right.checkbox("Add filters", key=checkbox_key)
 
                 if modify:

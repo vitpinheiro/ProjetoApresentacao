@@ -49,13 +49,6 @@ class View:
                 raise ValueError("Email repetido")
         if senha == "": raise ValueError('Senha Inválida')
         banda = Banda(0,id_genero,nome,fone,email,senha)
-        if id_genero == " ": raise ValueError()
-        if nome == " ": raise ValueError()
-        if fone == " ": raise ValueError()
-        if email == " ": raise ValueError()
-        if senha == " ": raise ValueError()
-        for x in View.banda_listar():
-            if x.get_email() == email:raise ValueError("email repetido")
         NBanda.inserir(banda)
 
 
@@ -75,11 +68,6 @@ class View:
                 raise ValueError("Email repetido")
         if senha == "": raise ValueError('Senha Inválida')
         banda = Banda(id,id_genero,nome,fone,email,senha)
-        if id_genero == " ": raise ValueError()
-        if nome == " ": raise ValueError()
-        if fone == " ": raise ValueError()
-        if email == " ": raise ValueError()
-        if senha == " ": raise ValueError()
         NBanda.atualizar(banda)
 
 
@@ -151,6 +139,7 @@ class View:
                 if a.get_id_banda()==usuario.get_id():
                     apresentacoes_usuario.append(a)
             return apresentacoes_usuario
+   
         
     def relatorio_meses(u,ano):
         apresentacoes=View.apresentacoes_usuario(u)
@@ -211,24 +200,26 @@ class View:
         for c in cidades:
             nomes_cidade.append(c['Nome'])
             qtd_cidade.append(c['qtd'])
+
         return [nomes_cidade,qtd_cidade]
     def relatorio_bandas():
-        bandas=View.banda_listar()
+        bandas = View.banda_listar()
         apresentacoes = View.apresentacao_listar()
         bandas_total = []
         for b in bandas:
-            qtd=0
-            if b.get_id()!=0:
+            qtd = 0
+            if b.get_id() != 0:
                 for a in apresentacoes:
-                    if b.get_id()==a.get_id_banda():
-                        qtd+=1
-                bandas_total.append({"Banda":b.get_nome(),"qtd": qtd})
-        nomes_banda=[]
+                    if b.get_id() == a.get_id_banda():
+                        qtd += 1
+                bandas_total.append({"Banda": b.get_nome(), "qtd": qtd})
+        nomes_banda = []
         qtd_banda = []
         for b in bandas_total:
             nomes_banda.append(b['Banda'])
             qtd_banda.append(b['qtd'])
-        return [nomes_banda,qtd_banda]
+        return [nomes_banda, qtd_banda]
+    
     def relatorio_generos():
         generos =View.genero_listar()
         bandas=View.banda_listar()
@@ -288,6 +279,14 @@ class View:
                 apresentacoes_pendentes.append({"cidade":cidade.get_nome(),"data":data})
         return apresentacoes_pendentes
 
+    def apresentacoes_pendentes_todas(u):
+        apresentacoes_usuario= View.apresentacoes_usuario(u)
+        hoje = datetime.today()
+        apresentacoes_pendentes=[]
+        for a in apresentacoes_usuario:
+            if  a.get_data()>hoje:
+                apresentacoes_pendentes.append(a)
+        return apresentacoes_pendentes
 
 
 

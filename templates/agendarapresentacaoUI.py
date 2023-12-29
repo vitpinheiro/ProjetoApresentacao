@@ -7,7 +7,7 @@ class ApresentacaoHorarioUI:
     @staticmethod
     def main():
         st.header('Agendar uma apresentação')
-        tab1, tab2= st.tabs(["Solicitar", "Solicitadas"])
+        tab1, tab2= st.tabs(["Disponíveis", "Solicitadas"])
         with tab1:
             ApresentacaoHorarioUI.agendar()
         with tab2:
@@ -23,8 +23,10 @@ class ApresentacaoHorarioUI:
                 id_cidade= None if id_cidade is None else id_cidade.get_id()
                 View.apresentacao_inserir(st.session_state["usuario_id"],id_cidade,data,False)
                 st.success('Apresentação solicitada com sucesso')
+                
             except ValueError as erro:
-                st.error(erro)   
+                st.error(erro)
+           
     def solicitadas():
         apresentacoes_solicitadas = View.apresentacoes_solicitadas(st.session_state["usuario_id"])
         if len(apresentacoes_solicitadas)==0:
